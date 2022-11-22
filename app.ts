@@ -1,7 +1,16 @@
-function combine(input1:number, input2:number) {
-    const result = input1 + input2;
-    return result;
+let userInput: unknown;
+let userName: string;
+
+userInput = 5;
+userInput = 'zzbtang';
+
+// if문이 없으면 에러
+if (typeof userInput === 'string') {
+  userName = userInput;
 }
 
-const combineAges = combine(30, 26);
-console.log(combineAges);
+function generateError(message: string, code: number): never {
+  throw { msg: message, errorCode: code };
+}
+
+generateError('An error occured', 500);
