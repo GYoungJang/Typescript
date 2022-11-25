@@ -1,16 +1,11 @@
-let userInput: unknown;
-let userName: string;
+class Department {
+  name: string;
 
-userInput = 5;
-userInput = "zzbtang";
-
-// if문이 없으면 에러
-if (typeof userInput === "string") {
-  userName = userInput;
+  constructor(n: string) {
+    this.name = n;
+  }
 }
 
-function generateError(message: string, code: number): never {
-  throw { msg: message, errorCode: code };
-}
+const accounting = new Department('Accounting');
 
-generateError("An error occurred", 500);
+console.log(accounting);
