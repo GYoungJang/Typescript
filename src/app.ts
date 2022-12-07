@@ -12,12 +12,12 @@ type employee = {
 type ElevatedEmployee = Admin & employee;
 
 const e1: ElevatedEmployee = {
-  name: "zzb",
-  privileges: ["create-server"],
+  name: 'tang',
+  privileges: ['create-server'],
   startDate: new Date(),
 };
 
-type Combinable1 = string | number
-type Numeric = boolean | number
+type Combinable1 = string | number;
+type Numeric = boolean | number;
 
 type Universal = Combinable1 & Numeric;
