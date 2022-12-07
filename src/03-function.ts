@@ -5,7 +5,7 @@ const tetfunction = () => {
   return "test";
 };
 console.log(tetfunction());
-function sum1(a: number, b: number) {
+function sum1(a: number, b: number){
   return a + b;
 }
 // console.log( sum1(1,'a') );
