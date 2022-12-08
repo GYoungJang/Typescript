@@ -4,12 +4,12 @@ type Admin = {
   privileges: string[];
 };
 
-type employee = {
+type Employee = {
   name: string;
   startDate: Date;
 };
 
-type ElevatedEmployee = Admin & employee;
+type ElevatedEmployee = Admin & Employee;
 
 const e1: ElevatedEmployee = {
   name: 'tang',
@@ -21,3 +21,16 @@ type Combinable1 = string | number;
 type Numeric = boolean | number;
 
 type Universal = Combinable1 & Numeric;
+
+function add3(a: Combinable1, b: Combinable1) {
+  // if문이 타입가드
+  if (typeof a === 'string' || typeof b === 'string')
+    return a.toString() + b.toString();
+  return a + b;
+}
+
+type UnknownEmployee = Employee | Admin;
+
+function printEmployeeInformation(emp: UnknownEmployee) {
+  console.log('Name : ' + emp.name);
+}
