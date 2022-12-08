@@ -1,36 +1,21 @@
-// 객체 생성 x, 타입 정의
-type Admin = {
-  name: string;
-  privileges: string[];
-};
+// const names: any[]=[];
+// 제네릭 타입
+// const names: Array<string | number> = []; // string[] 같음
+// const names: Array<string> = []; // string[] 같음
 
-type Employee = {
-  name: string;
-  startDate: Date;
-};
+// 프로미스
+// const promise: Promise<string> = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve('this is done!');
+//   }, 2000);
+// });
 
-type ElevatedEmployee = Admin & Employee;
-
-const e1: ElevatedEmployee = {
-  name: 'tang',
-  privileges: ['create-server'],
-  startDate: new Date(),
-};
-
-type Combinable1 = string | number;
-type Numeric = boolean | number;
-
-type Universal = Combinable1 & Numeric;
-
-function add3(a: Combinable1, b: Combinable1) {
-  // if문이 타입가드
-  if (typeof a === 'string' || typeof b === 'string')
-    return a.toString() + b.toString();
-  return a + b;
+// 제네릭 함수 생성
+// 두 객체 병합하고 새 객체 반환
+function merge<T, U>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
 }
 
-type UnknownEmployee = Employee | Admin;
+// console.log(merge({ name: 'zzb' }, { age: 20 }));
 
-function printEmployeeInformation(emp: UnknownEmployee) {
-  console.log('Name : ' + emp.name);
-}
+const mergedObj = merge({ name: 'tang' }, { age: 20 });

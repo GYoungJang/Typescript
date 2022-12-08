@@ -1,11 +1,17 @@
 interface Name {
   readonly name: string;
 }
+// class Cat implements Name {
+//   name: string;
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+//   sayHello() {
+//     return "야옹";
+//   }
+// }
 class Cat implements Name {
-  name: string;
-  constructor(name: string) {
-    this.name = name;
-  }
+  constructor(readonly name: string) {}
   sayHello() {
     return "야옹";
   }
@@ -29,11 +35,11 @@ function talkPet(pet: Pet): string {
   } else if (pet instanceof Fish) {
     return "물고기는 말을 하지 못합니다.";
   }
-  return 'exit';
+  return "exit";
 }
 
-const cat:Pet = new Cat("고양이");
-const fish:Pet = new Fish("물고기");
+const cat: Pet = new Cat("고양이");
+const fish: Pet = new Fish("물고기");
 
 console.log(talkPet(cat));
 console.log(talkPet(fish));
