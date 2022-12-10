@@ -59,13 +59,17 @@ function extractAndConvert<T extends object, U extends keyof T>(
 console.log(extractAndConvert({ name: 'zzb' }, 'name'));
 
 // 제네릭 클래스
-class DataStorage<T> {
+// 원시값에만 작동하도록..
+class DataStorage<T extends string | number | boolean> {
   private data: T[] = [];
   addItem(item: T) {
     this.data.push(item);
   }
 
   removeItem(item: T) {
+    if (this.data.indexOf(item) === -1) {
+      return;
+    }
     this.data.splice(this.data.indexOf(item), 1);
   }
 
@@ -81,9 +85,51 @@ textStorage.removeItem('zzb');
 console.log(textStorage.getItems());
 
 const numberStorage = new DataStorage<number>();
-const objStorage = new DataStorage<object>();
-objStorage.addItem({ name: 'zzb' });
-objStorage.addItem({ name: 'tang' });
+// const objStorage = new DataStorage<object>();
+// objStorage.addItem({ name: 'zzb' });
+// objStorage.addItem({ name: 'tang' });
 
-objStorage.removeItem({ name: 'zzb' });
-console.log(objStorage.getItems());
+// 객체나 배열은 indexOf는 작동하지 않음
+// console.log(objStorage.getItems());
+// 위의 zzb과는 다른 객체이기 때문에 다른 주소를 가짐
+// 따라서 자바스크립트가 주소를 찾지 못해서 indexOf가 -1 반환해서
+// 배열의 마지막 요소를 제거
+// objStorage.removeItem({ name: 'zzb' });
+// 정상 작동하려면 정확히 같은 객체를 전달해야함
+// const maxObj = { name: 'zzbtang' };
+// objStorage.addItem(maxObj);
+// console.log(objStorage.getItems());
+// objStorage.removeItem(maxObj);
+
+// console.log(objStorage.getItems());
+
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+// function createCourseGoal(
+//   title: string,
+//   description: string,
+//   date: Date
+// ): CourseGoal {
+//   return { title: title, description: description, completeUntil: date };
+// }
+
+// Partial 타입
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  return courseGoal as CourseGoal;
+}
+
+// Readonly 타입
+const names: Readonly<string[]> = ['zzb', 'tang'];
+// names.push('aaa');
